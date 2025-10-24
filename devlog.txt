@@ -4,3 +4,12 @@ started to design front end diagrams and website css formatting on google slides
 flag submitted, readme to be updated, requirements to be added once coding starts
 cool beans 
 -Matthew Ciu
+
+10/23/2025
+today we had our documents reviewed, many comments were made and many comments have been taken. 
+new design pdf if being created due to changed objective. 
+old design doc comments are being used to edit new, new knowledge being applied like lists cannot go in SQLs
+organizing tangled component map, need to add dates to timeline
+variables changing to be casual case
+train is chugging smoothly
+-Matthew Ciu
