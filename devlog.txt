@@ -8,8 +8,17 @@ cool beans
 10/23/2025
 today we had our documents reviewed, many comments were made and many comments have been taken. 
 new design pdf if being created due to changed objective. 
-old design doc comments are being used to edit new, new knowledge being applied like lists cannot go in SQLs
-organizing tangled component map, need to add dates to timeline
+old design doc comments are being used to edit new
+
+INITIAL DD REVIEW 
+new knowledge being applied like lists cannot go in SQLs
+organizing tangled component map
+need to add dates to timeline
 variables changing to be casual case
+would benefit from listing specific pages on site map
+provide explicit examples
+"bland design" "unprofessional" on our google slide design mark up, so mean
+will expand on CSS once further into process
+
 train is chugging smoothly
 -Matthew Ciu
