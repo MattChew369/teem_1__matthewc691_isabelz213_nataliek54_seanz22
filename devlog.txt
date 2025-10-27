@@ -22,3 +22,11 @@ will expand on CSS once further into process
 
 train is chugging smoothly
 -Matthew Ciu
+
+10/24/2025
+new design doc created for PIVOT
+chose senario SIGMA
+will organize by genre in db 
+designed new pages for CSS 
+
+-Matthew Ciu
