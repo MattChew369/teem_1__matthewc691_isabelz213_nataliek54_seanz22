@@ -53,6 +53,7 @@ program components ~ tables
 maps
 - in site maps, rename the cells to the htmls, update it to the new one
 - in component maps, map needs to be more "cyclical", show the cycle 
+- create browse.html
 
 other concerns & questions
 - is there a plan is someone creates a story with the same title as another? (probably create smt to check that)
