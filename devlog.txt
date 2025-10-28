@@ -1,16 +1,16 @@
 10/22/2025
-we started the design document on google docs, the pdf will be submitted when ready 
+we started the design document on google docs, the pdf will be submitted when ready
 started to design front end diagrams and website css formatting on google slides, imgs to be added to design document
 flag submitted, readme to be updated, requirements to be added once coding starts
-cool beans 
+cool beans
 -Matthew Ciu
 
 10/23/2025
-today we had our documents reviewed, many comments were made and many comments have been taken. 
-new design pdf if being created due to changed objective. 
+today we had our documents reviewed, many comments were made and many comments have been taken.
+new design pdf if being created due to changed objective.
 old design doc comments are being used to edit new
 
-INITIAL DD REVIEW 
+INITIAL DD REVIEW
 new knowledge being applied like lists cannot go in SQLs
 organizing tangled component map
 need to add dates to timeline
@@ -26,16 +26,16 @@ train is chugging smoothly
 10/24/2025
 new design doc created for PIVOT
 chose senario SIGMA
-will organize by genre in db 
-designed new pages for CSS 
+will organize by genre in db
+designed new pages for CSS
 
 -Matthew Ciu
 
 10/27/2025
-PIVOT design documents reviewd 
+PIVOT design documents reviewd
 PART 2 DD REVIEW thank you DECK and bigpro
 
-task timeline 
+task timeline
 - dates is WAY off, align to new target ship date 11/10/2025
 - add people to roles in gaernal task timeline
 
@@ -52,7 +52,7 @@ program components ~ tables
 
 maps
 - in site maps, rename the cells to the htmls, update it to the new one
-- in component maps, map needs to be more "cyclical", show the cycle 
+- in component maps, map needs to be more "cyclical", show the cycle
 - create browse.html
 
 other concerns & questions
@@ -60,11 +60,13 @@ other concerns & questions
 
 compliments! --
 - they like the mockups! hooray!
-- they like the clarifications on the site map! yay! 
+- they like the clarifications on the site map! yay!
 - they think dates of the contributiosn is a good idea! hoorah!
 - they like our Today's task list!
 
-God I'm so tired. Hands in team! 1, 2, 3! Teem_1! 
+God I'm so tired. Hands in team! 1, 2, 3! Teem_1!
 - Matthew Ciu
 
-
+10/28/25
+added functional app and made a natalie branch! yippee! it technically runs...
+- Natalie Keiger
