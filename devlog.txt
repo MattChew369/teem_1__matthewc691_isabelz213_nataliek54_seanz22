@@ -30,3 +30,41 @@ will organize by genre in db
 designed new pages for CSS 
 
 -Matthew Ciu
+
+10/27/2025
+PIVOT design documents reviewd 
+PART 2 DD REVIEW thank you DECK and bigpro
+
+task timeline 
+- dates is WAY off, align to new target ship date 11/10/2025
+- add people to roles in gaernal task timeline
+
+program components ~ list
+- explain Static : comment saying "do you mean static files?"
+- people don't understand the process oh no!
+  needs more explaination, need more to how each component relates to eachother
+
+program components ~ tables
+- text, not strings cause squlite3 doesn't have string datatype (the more you know)
+- "starting author" might not be neccesary as it's jsut the 1st contributor
+- usernames in contributions hsould be FK, referencing the other table (users)
+- page_edited is FK, page_edit is essentially referencing title from stories
+
+maps
+- in site maps, rename the cells to the htmls, update it to the new one
+- in component maps, map needs to be more "cyclical", show the cycle 
+- create browse.html
+
+other concerns & questions
+- is there a plan is someone creates a story with the same title as another? (probably create smt to check that)
+
+compliments! --
+- they like the mockups! hooray!
+- they like the clarifications on the site map! yay! 
+- they think dates of the contributiosn is a good idea! hoorah!
+- they like our Today's task list!
+
+God I'm so tired. Hands in team! 1, 2, 3! Teem_1! 
+- Matthew Ciu
+
+
