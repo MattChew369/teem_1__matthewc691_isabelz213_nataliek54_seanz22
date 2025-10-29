@@ -1,8 +1,7 @@
 # teem_1__matthewc691_isabelz213_nataliek54_seanz22
 Repo of Holding for SoftDev25-26 Project 0 for Teem_1
 
-**PROJECT DESCRIPTION
-**
+PROJECT DESCRIPTION:
 NarraMaker is a collaborative story writing website that is free for all users. By making an account, you can read and write stories and add to others’. These stories are categorized by genre and accessible to other users on the Browse page. NarraMaker will track contributions by users and allow users to work together to craft narratives in an open, updated, and easy-to-understand environment.
 
 Install Guide: 
