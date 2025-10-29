@@ -9,7 +9,7 @@ app = Flask(__name__)    #create Flask object
 
 @app.route("/")
 def main_page():
-    return "this is the app!!"
+    return render_template('login.html')
 
 app.debug = True
 app.run()
