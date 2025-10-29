@@ -13,8 +13,8 @@ In order to gain access to the final website, this repository must be git cloned
 <br>
 Open terminal and go into the route use:
 <br>	 cd teem_1__matthewc691_isabelz213_nataliek54_seanz22/app
-Run the python file using:
-python __init__.py
-Open the link given after running __init__.py
+<br> Run the python file using:
+<br> python __init__.py
+<br> Open the link given after running __init__.py
 
 
