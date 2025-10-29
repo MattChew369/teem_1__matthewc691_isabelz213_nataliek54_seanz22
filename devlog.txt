@@ -70,3 +70,9 @@ God I'm so tired. Hands in team! 1, 2, 3! Teem_1!
 10/28/25
 added functional app and made a natalie branch! yippee! it technically runs...
 - Natalie Keiger
+
+10/28/25
+README updated with Install Guide and Launch Codes. 
+app.py is functional 
+very cool 
+- Matthew Ciu
