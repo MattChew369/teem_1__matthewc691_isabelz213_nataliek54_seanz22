@@ -2,7 +2,7 @@
 #p00
 #10-28-25
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request, session
 import sqlite3
 
 app = Flask(__name__)    #create Flask object

@@ -76,3 +76,13 @@ README updated with Install Guide and Launch Codes.
 app.py is functional 
 very cool 
 - Matthew Ciu
+
+10/29/25
+README udpated with project descriptoin 
+home.html being developed rn 
+color pallette being chosen and argued about
+added requirements.txt
+editted launch codes
+
+all is well 
+- Matthew Ciu
