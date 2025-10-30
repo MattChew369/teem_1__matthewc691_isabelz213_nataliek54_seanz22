@@ -84,5 +84,9 @@ color pallette being chosen and argued about
 added requirements.txt
 editted launch codes
 
+10/30/25
+made log in page look acceptable, not sure how to make it check against db yet 
+- Natalie Keiger
+
 all is well 
 - Matthew Ciu
