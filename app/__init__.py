@@ -9,6 +9,10 @@ app = Flask(__name__)    #create Flask object
 
 @app.route("/")
 def main_page():
+    return render_template('home.html')
+
+@app.route("/login")
+def login_page():
     return render_template('login.html')
 
 app.debug = True

@@ -3,40 +3,89 @@
 <html>
 
 <head>
-  <title> Log in </title>
+  <title> NarraMaker Log in </title>
 </head>
 
 <style>
   body {
-    background-color: #A0CFD3;
+    background-color: #8ea584;
   }
 
   h1 {
-    background-color: #FCFADE;
+    padding: 5px;
+    color: #43372f;
+    font-family: "Times New Roman", Times, serif;
+    text-align: center;
   }
+
+  .login_section {
+    padding: 10px;
+    text-align: center;
+  }
+
+  .subbutton {
+    background-color: #8ea584;
+    border-color: #8ea584;
+    color: #43372f;
+    font-family: "Times New Roman", Times, serif;
+    text-decoration: underline;
+  }
+
+  .bigbox {
+    background-color: #737a5d;
+  }
+
+  .typeinputs {
+    background-color: #f2eddd;
+    border-color: #f2eddd;
+  }
+
+  h3 {
+    color: #43372f;
+    font-family: "Times New Roman", Times, serif;
+    margin-left: 10px;
+  }
+
+  footer {
+    background-color: #43372f;
+    text-align: center;
+    padding: 5px;
+    color: #737a5d;
+  }
+
+  .return {
+    color: #f2eddd;
+  }
+
+
 </style>
 
-    <head>
-      <title> Welcome to NarraMaker! </title>
-    </head>
-
     <body>
-      <h1>
-        Log in below:
-      </h1>
-      <h3>
-        Enter your username and password. below to proceed.
-      </h3>
-      <form action="/login" method="POST">
-        <input type="text" name="username">
+      <div class="bigbox">
+        <h1>
+          Welcome to NarraMaker! Log in below:
+        </h1>
+        <div class="login_section">
+          <form action="/home" method="POST">
+            <input type="text" name="username" class="typeinputs">
+            <br>
+            <br>
+            <input type="text" name ="password" class="typeinputs">
+            <br>
+            <br>
+            <input type="submit" name="sub1" value="Log in" class="subbutton">
+          </form>
+          <form action="/create_acc.html" method="POST">
+            <br>
+            <input type="submit" name="newacc" value="Don't have an account? Register here." class="subbutton">
+          </form>
+        </div>
         <br>
-        <br>
-        <input type="text" name ="password">
-        <br>
-        <br>
-        <input type="submit" name="sub1">
-      </form>
-      <br>
+      </div>
     </body>
+
+    <footer>
+      <a href="/" class="return"> Return home here. </a>
+    </footer>
 
 </html>
