@@ -1,4 +1,4 @@
-#teem1
+#teem_1
 #p00
 #10-28-25
 
@@ -13,3 +13,11 @@ def main_page():
 
 app.debug = True
 app.run()
+'''
+@app.route("edit_page")
+def contribute(newWords, ):
+    with
+
+
+html: button submit runs contribute code,
+'''
