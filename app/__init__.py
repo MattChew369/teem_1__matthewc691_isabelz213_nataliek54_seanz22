@@ -5,7 +5,13 @@
 from flask import Flask, render_template, request, session
 import sqlite3
 
-app = Flask(__name__)    #create Flask object
+
+ACC_FILE = "users.db"
+
+db = sqlite3.connect(ACC_FILE)
+c = db.cursor()
+
+app = Flask(__name__)
 
 @app.route("/")
 def main_page():
