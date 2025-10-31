@@ -21,6 +21,10 @@ def main_page():
 def login_page():
     return render_template('login.html')
 
+@app.route("/create_acc")
+def register_page():
+    return render_template('create_acc.html')
+
 app.debug = True
 app.run()
 '''

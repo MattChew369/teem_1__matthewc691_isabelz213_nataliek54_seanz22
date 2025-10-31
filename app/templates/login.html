@@ -63,19 +63,21 @@
     <body>
       <div class="bigbox">
         <h1>
-          Welcome to NarraMaker! Log in below:
+          Log in below:
         </h1>
         <div class="login_section">
           <form action="/home" method="POST">
+            <p> Username: </p>
             <input type="text" name="username" class="typeinputs">
             <br>
             <br>
+            <p> Password: </p>
             <input type="text" name ="password" class="typeinputs">
             <br>
             <br>
             <input type="submit" name="sub1" value="Log in" class="subbutton">
           </form>
-          <form action="/create_acc.html" method="POST">
+          <form action="/create_acc" method="GET">
             <br>
             <input type="submit" name="newacc" value="Don't have an account? Register here." class="subbutton">
           </form>

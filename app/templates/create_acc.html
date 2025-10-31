@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title> NarraMaker: Register </title>
+
+  </head>
+
+  <style>
+    body {
+      background-color: #8ea584;
+    }
+
+    h1 {
+      padding: 5px;
+      color: #43372f;
+      font-family: "Times New Roman", Times, serif;
+      text-align: center;
+    }
+
+    .login_section {
+      padding: 10px;
+      text-align: center;
+    }
+
+    .subbutton {
+      background-color: #8ea584;
+      border-color: #8ea584;
+      color: #43372f;
+      font-family: "Times New Roman", Times, serif;
+      text-decoration: underline;
+    }
+
+    .bigbox {
+      background-color: #737a5d;
+    }
+
+    .typeinputs {
+      background-color: #f2eddd;
+      border-color: #f2eddd;
+    }
+
+    h3 {
+      color: #43372f;
+      font-family: "Times New Roman", Times, serif;
+      margin-left: 10px;
+    }
+
+    footer {
+      background-color: #43372f;
+      text-align: center;
+      padding: 5px;
+      color: #737a5d;
+    }
+
+    .return {
+      color: #f2eddd;
+    }
+
+    p {
+      font-family: "Times New Roman", Times, serif;
+      color: #43372f;
+    }
+
+  </style>
+
+  <body>
+    <div class="bigbox">
+      <h1>
+        Welcome to NarraMaker! Register a new account below:
+      </h1>
+      <div class="login_section">
+        <form action="/home" method="POST">
+          <p> Username: </p>
+          <input type="text" name="username" class="typeinputs">
+          <br>
+          <br>
+          <p> Password: </p>
+          <input type="text" name ="password" class="typeinputs">
+          <br>
+          <br>
+          <input type="submit" name="sub1" value="Log in" class="subbutton">
+        </form>
+        <form action="/login" method="GET">
+          <br>
+          <input type="submit" name="newacc" value="Already have an account? Log in here." class="subbutton">
+        </form>
+      </div>
+      <br>
+    </div>
+  </body>
+
+    <footer>
+      <a href="/" class="return"> Return home here. </a>
+    </footer>
+
+</html>
