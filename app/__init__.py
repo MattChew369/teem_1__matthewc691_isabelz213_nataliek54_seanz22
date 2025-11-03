@@ -17,13 +17,33 @@ app.config['SESSION_PERMANENT'] = False
 app.config['SESSION_TYPE'] = 'filesystem'
 app.secret_key = 'asdhajskjbweifnoihgis'
 
+#table for testing (remove after register works)
+c.execute("DROP TABLE if EXISTS users;")
+c.execute("CREATE TABLE users(username text primary key, password text);")
+c.execute("INSERT INTO users VALUES('ricefarmer', 'riceplant'),('ricefarmer2', 'ricerice'),('ricefarmer3','ecir');")
+
+db.commit()
+db.close()
+
 @app.route("/", methods=['GET', 'POST'])
 def login_page():
-    if request.method == 'POST':
-        session['username'] = request.form['username']
+    #session.pop('username',None) #to reset session since we dont have logout yet
+    if 'username' in session:
         return redirect('/home')
-    elif session['username']:
+    testUser = request.form.get('username')
+    testPass = request.form.get('password')
+
+    db = sqlite3.connect(ACC_FILE)
+    c = db.cursor()
+    check = c.execute(f"SELECT COUNT(*) FROM users WHERE username = '{testUser}' AND password = '{testPass}';")
+    result = check.fetchone()[0]
+    if result == 0:
+        return render_template('login.html')
+    else:
+        session['username'] = request.form.get('username')
         return redirect('/home')
+    db.commit()
+    db.close()
     return render_template('login.html')
 
 @app.route("/home")
