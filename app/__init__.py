@@ -7,9 +7,12 @@ import sqlite3
 from flask import request
 
 ACC_FILE = "users.db"
+STORY_FILE = "stories.db"
 
 db = sqlite3.connect(ACC_FILE)
 c = db.cursor()
+sdb = sqlite3.connect(STORY_FILE)
+sc = sdb.cursor()
 
 app = Flask(__name__)
 
@@ -21,9 +24,14 @@ app.secret_key = 'asdhajskjbweifnoihgis'
 c.execute("DROP TABLE if EXISTS users;")
 c.execute("CREATE TABLE users(username text primary key, password text);")
 c.execute("INSERT INTO users VALUES('ricefarmer', 'riceplant'),('ricefarmer2', 'ricerice'),('ricefarmer3','ecir');")
-
 db.commit()
 db.close()
+#table for testing (remove after stories.db works)
+sc.execute("DROP TABLE if EXISTS stories;")
+sc.execute("CREATE TABLE stories(title text primary key, genre text, length int, content text);")
+sc.execute("INSERT INTO stories VALUES('gameTitle', 'Horror', 32, 'This is the craziest story ever.');")
+sdb.commit()
+sdb.close()
 
 #trying to make proxy page that does the logic, i was running into an issue
 #with trying to make it only redirect you after you click the button
@@ -87,14 +95,21 @@ def redirect_create():
 def register_page():
     return render_template('create_acc.html')
 
+@app.route("/browse_page")
+def browse_page():
+    return render_template('browse.html')
+
+
 app.debug = True
 app.run()
 
 '''
-@app.route("edit_page")
+@app.route("/edit_page")
 def contribute(newWords, ):
     with
 
 
 html: button submit runs contribute code,
 '''
+
+
