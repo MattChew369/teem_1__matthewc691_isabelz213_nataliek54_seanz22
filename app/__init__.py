@@ -95,8 +95,13 @@ def register_page():
 
 @app.route("/browse_page")
 def browse_page():
+
     return render_template('browse.html')
 
+def browse_lists():
+    db = sqlite3.connect(STORY_FILE)
+    c = db.cursor()
+    c.execute("SELECT * FROM stories WHERE username = ")
 
 app.debug = True
 app.run()
