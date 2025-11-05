@@ -97,20 +97,7 @@ def register_page():
 def browse_page():
     return render_template('browse.html')
 
-<<<<<<< HEAD
-@app.route("/")
-def main_page():
-    return "this is the app!!"
-@app.route("/register", methods = ['GET', 'POST'])
-def register(): 
-	message = ' '
-	if request.method == 'POST' and 'name' in request.form and 'password'in request.form: 
-		username = request.form['name']
-		password = request.form['password'] 
-		#--stopped 
-=======
 
->>>>>>> c8fbf7d1386605806173ac8ec6180ce82a09dc1b
 app.debug = True
 app.run()
 
