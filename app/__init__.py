@@ -23,13 +23,13 @@ app.secret_key = 'asdhajskjbweifnoihgis'
 #table for testing (remove after register works)
 #c.execute("DROP TABLE if EXISTS users;")
 c.execute("CREATE TABLE IF NOT EXISTS users(username text primary key, password text);")
-c.execute("INSERT INTO users VALUES('ricefarmer', 'riceplant'),('ricefarmer2', 'ricerice'),('ricefarmer3','ecir');")
+#c.execute("INSERT INTO users VALUES('ricefarmer', 'riceplant'),('ricefarmer2', 'ricerice'),('ricefarmer3','ecir');")
 db.commit()
 db.close()
 #table for testing (remove after stories.db works)
 #sc.execute("DROP TABLE if EXISTS stories;")
 sc.execute("CREATE TABLE IF NOT EXISTS stories(title text primary key, genre text, length int, content text);")
-sc.execute("INSERT INTO stories VALUES('gameTitle', 'Horror', 32, 'This is the craziest story ever.');")
+#sc.execute("INSERT INTO stories VALUES('gameTitle', 'Horror', 32, 'This is the craziest story ever.');")
 sdb.commit()
 sdb.close()
 
@@ -37,7 +37,7 @@ sdb.close()
 #with trying to make it only redirect you after you click the button
 #not sure now
 
-@app.route('/redirect_login', methods=['POST'])
+@app.route('/redirect_login', methods=['POST', 'GET'])
 def redirect_login():
     testUser = request.form.get('username')
     testPass = request.form.get('password')
@@ -63,13 +63,13 @@ def login_page():
     return render_template('login.html')
 
 
-@app.route("/home")
+@app.route("/home", methods=['GET', 'POST'])
 def home_page():
     if not session.get('username'):
         return redirect('/')
     return render_template('home.html')
 
-@app.route('/redirect_create', methods=['POST'])
+@app.route('/redirect_create', methods=['POST', 'GET'])
 def redirect_create():
     testUser = request.form.get('username')
     testPass = request.form.get('password')
