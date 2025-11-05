@@ -94,3 +94,7 @@ made log in page look acceptable, not sure how to make it check against db yet
 11/2/25
 Added function to login that checks if username and password matches to the users database (temporary until registering is finished)
 - Sean
+
+11/4/25
+Okay erm I tried to make create_acc work by making a function that does the redirect logic separately but I am so lost. IDK why it just keeps you on the login page now :( HELP
+- Natalie
