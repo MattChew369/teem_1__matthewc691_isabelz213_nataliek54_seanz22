@@ -22,13 +22,13 @@ app.secret_key = 'asdhajskjbweifnoihgis'
 
 #table for testing (remove after register works)
 #c.execute("DROP TABLE if EXISTS users;")
-c.execute("CREATE TABLE users(username text primary key, password text);")
+c.execute("CREATE TABLE IF NOT EXISTS users(username text primary key, password text);")
 c.execute("INSERT INTO users VALUES('ricefarmer', 'riceplant'),('ricefarmer2', 'ricerice'),('ricefarmer3','ecir');")
 db.commit()
 db.close()
 #table for testing (remove after stories.db works)
 #sc.execute("DROP TABLE if EXISTS stories;")
-sc.execute("CREATE TABLE stories(title text primary key, genre text, length int, content text);")
+sc.execute("CREATE TABLE IF NOT EXISTS stories(title text primary key, genre text, length int, content text);")
 sc.execute("INSERT INTO stories VALUES('gameTitle', 'Horror', 32, 'This is the craziest story ever.');")
 sdb.commit()
 sdb.close()
@@ -85,7 +85,7 @@ def redirect_create():
         db.close()
         session['username'] = testUser
         return redirect('/home')
-    else: 
+    else:
         db.close()
         return redirect('/create_acc')
 
@@ -109,5 +109,3 @@ def contribute(newWords, ):
 
 html: button submit runs contribute code,
 '''
-
-
