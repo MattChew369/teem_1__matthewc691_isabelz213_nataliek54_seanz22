@@ -46,7 +46,7 @@ def redirect_login():
 
     db = sqlite3.connect(ACC_FILE)
     c = db.cursor()
-    check = c.execute("SELECT COUNT(*) FROM users WHERE username = ? AND password = ?", (testUser, testPass))
+    check = c.execute(f"SELECT COUNT(*) FROM users WHERE username = {testUser} AND password = {testPass}")
     result = check.fetchone()[0]
     if result == 0:
         db.close()
@@ -65,8 +65,8 @@ def login_page():
 
 @app.route("/home", methods=['GET', 'POST'])
 def home_page():
-    if not session.get('username'):
-        return redirect('/')
+    #if not session.get('username'):
+    #    return redirect('/')
     return render_template('home.html')
 
 @app.route('/redirect_create', methods=['POST', 'GET'])
@@ -77,10 +77,10 @@ def redirect_create():
         return redirect('/create_acc')
     db = sqlite3.connect(ACC_FILE)
     c = db.cursor()
-    check = c.execute("SELECT COUNT(*) FROM users WHERE username = ?", (testUser,))
+    check = c.execute(f"SELECT COUNT(*) FROM users WHERE username = {testUser}")
     result = check.fetchone()[0]
     if result == 0:
-        c.execute("INSERT INTO users VALUES (?, ?)", (testUser, testPass))
+        c.execute(f"INSERT INTO users VALUES ({testUser}, {testPass})")
         db.commit()
         db.close()
         session['username'] = testUser
