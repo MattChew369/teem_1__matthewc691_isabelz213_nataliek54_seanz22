@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title> Browse NarraMaker </title>
+</head>
+
+<style>
+
+  body {
+    background-color: #737a5d;
+  }
+
+  a:link {
+    color: #f2eddd;
+  }
+
+  a:visited {
+    color: #f2eddd;
+  }
+
+  a:hover {
+    color: #8ea584;
+  }
+
+  .nav {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    margin: 0px;
+    padding: 5px;
+    background-color: #43372f;
+    color: #f2eddd;
+    font-family: "Times New Roman", Times, serif;
+    text-align: center;
+  }
+
+  .storylist {
+    color: #43372f;
+    font-family: "Times New Roman", Times, serif;
+    text-align: left;
+    padding: 5px;
+    margin: 5px;
+  }
+
+</style>
+
+<body>
+
+  <div class='nav'>
+    <div>
+      <a href='/home'> Home </a>
+    </div>
+    <div>
+      <a href='/browse_page'> Browse </a>
+    </div>
+    <div>
+      <a href='/add_story'> Add story </a>
+    </div>
+    <div>
+      <a href='/logout'> Log out </a>
+    </div>
+  </div>
+
+  <div class = 'storylist'>
+    <li> <b> Newest: </b> </li>
+      {% for story in new_stories %}
+      <l1> {{story[title]}} </l1>
+      <br>
+      {% endfor %}
+  </div>
+
+  <div class = 'storylist'>
+    <li> <b> Most popular: </b> </li>
+      {% for story in pop_stories %}
+      <l1> {{story[title]}} </l1>
+      <br>
+      {% endfor %}
+  </div>
+
+</body>
+
+</html>
