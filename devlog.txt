@@ -70,3 +70,31 @@ God I'm so tired. Hands in team! 1, 2, 3! Teem_1!
 10/28/25
 added functional app and made a natalie branch! yippee! it technically runs...
 - Natalie Keiger
+
+10/28/25
+README updated with Install Guide and Launch Codes. 
+app.py is functional 
+very cool 
+- Matthew Ciu
+
+10/29/25
+README udpated with project descriptoin 
+home.html being developed rn 
+color pallette being chosen and argued about
+added requirements.txt
+editted launch codes
+all is well 
+- Matthew Ciu
+
+10/30/25
+made log in page look acceptable, not sure how to make it check against db yet 
+- Natalie Keiger
+
+
+11/2/25
+Added function to login that checks if username and password matches to the users database (temporary until registering is finished)
+- Sean
+
+11/4/25
+Okay erm I tried to make create_acc work by making a function that does the redirect logic separately but I am so lost. IDK why it just keeps you on the login page now :( HELP
+- Natalie

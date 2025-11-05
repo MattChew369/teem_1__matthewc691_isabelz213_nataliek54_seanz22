@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title> {{ title }} </title>
+  </head>
+  <style>
+    body {
+      background-color: #A0CFD3;
+    }
+
+    h1 {
+      background-color: #FCFADE;
+    }
+  </style>
+    <h1>
+      {{ title }}
+    </h1>
+    <br>
+    <h3>
+      started by {{ starter }}
+    </h3>
+    <br>
+    <h3>
+      {{ content }}
+    </h3>
+    <br>
+    <h2>
+      Editing History:
+    </h2>
+    <br>
+    <ul>
+      <li>{{ starter }} started the story on {{ startDate }}</li>
+      <br>
+      {% for contribution in contributions %}
+        <l1>{{contribution[username]}} added to the story on {{contribution[date]}}</li>
+        <br>
+      {% endfor %}
+    </ul>
+
+
+</html>
