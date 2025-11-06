@@ -6,30 +6,97 @@
   </head>
   <style>
     body {
-      background-color: #A0CFD3;
+      background-color: #737a5d;
     }
 
-    h1 {
-      background-color: #FCFADE;
+      a:link {
+        color: #f2eddd;
+      }
+
+      a:visited {
+        color: #f2eddd;
+      }
+
+      a:hover {
+        color: #8ea584;
+      }
+
+      h3 {
+        color: #43372f;
+      }
+
+    .nav {
+      display: grid;
+      grid-template-columns: auto auto auto auto;
+      margin: 0px;
+      padding: 5px;
+      background-color: #43372f;
+      color: #f2eddd;
+      font-family: "Times New Roman", Times, serif;
+      text-align: center;
+    }
+
+
+    h2 {
+      color: #43372f;
+    }
+
+    .title {
+      color: #f2eddd;
+      background-color: #675c49;
+      padding: 5px;
+      display: grid;
+      grid-teplate-columns: auto auto;
+    }
+
+    .content {
+      color: #43372f;
+      font-family: "Times New Roman", Times, serif;
+      text-align: left;
+      padding: 5px;
+      margin: 5px;
     }
   </style>
-    <h1>
-      {{ title }}
-    </h1>
-    <br>
+
+
+    <div class='nav'>
+      <div>
+        <a href='/home'> Home </a>
+      </div>
+      <div>
+        <a href='/browse_page'> Browse </a>
+      </div>
+      <div>
+        <a href='/add_story'> Add story </a>
+      </div>
+      <div>
+        <a href='/logout'> Log out </a>
+      </div>
+    </div>
+
+    <div class='title'>
+      <div>
+        <h1>
+          {{ title }}
+        </h1>
+      </div>
+      <div>
+        <p> by {{ starter }} </p>
+      </div>
+    </div>
     <h3>
-      started by {{ starter }}
+      Genre: {{ genre }}
     </h3>
     <br>
-    <h3>
+    <p class='content'>
       {{ content }}
-    </h3>
+    </p>
     <br>
     <h2>
       Editing History:
     </h2>
     <br>
-    <ul>
+    <ul >
       <li>{{ starter }} started the story on {{ startDate }}</li>
       <br>
       {% for contribution in contributions %}

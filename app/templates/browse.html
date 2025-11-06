@@ -61,18 +61,18 @@
     </div>
   </div>
 
-  <div class = 'storylist'>
+  <!-- <div class = 'storylist'>
     <li> <b> Newest: </b> </li>
       {% for story in new_stories %}
       <l1> {{story[title]}} </l1>
       <br>
       {% endfor %}
-  </div>
+  </div> -->
 
   <div class = 'storylist'>
-    <li> <b> Most popular: </b> </li>
-      {% for story in pop_stories %}
-      <l1> {{story[title]}} </l1>
+    <li> <b> Longest: </b> </li>
+      {% for story in long_stories %}
+      <l1> {{story}} </l1>
       <br>
       {% endfor %}
   </div>
