@@ -58,6 +58,10 @@ def redirect_login():
     db.close()
     return render_template('login.html')
 
+@app.route("/logout", methods = ['GET', 'POST'])
+def logout():
+    session.pop('username',None)
+    return redirect('/')
 
 @app.route("/", methods=['GET', 'POST'])
 def login_page():
@@ -65,7 +69,6 @@ def login_page():
         return redirect('/home')
     #session.pop('username',None) #to reset session since we dont have logout yet
     return render_template('login.html')
-
 
 @app.route("/home", methods=['GET', 'POST'])
 def home_page():
