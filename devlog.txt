@@ -98,3 +98,7 @@ Added function to login that checks if username and password matches to the user
 11/4/25
 Okay erm I tried to make create_acc work by making a function that does the redirect logic separately but I am so lost. IDK why it just keeps you on the login page now :( HELP
 - Natalie
+
+11/5
+fixed login by restoring code from sunday with a few tweaks, but couldn't figure out the issue with register since code is very confusing
+- Sean
