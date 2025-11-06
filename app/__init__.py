@@ -27,9 +27,9 @@ c.execute("INSERT INTO users VALUES('ricefarmer', 'riceplant'),('ricefarmer2', '
 db.commit()
 db.close()
 #table for testing (remove after stories.db works)
-sc.execute("DROP TABLE if EXISTS stories;")
+#sc.execute("DROP TABLE if EXISTS stories;")
 sc.execute("CREATE TABLE IF NOT EXISTS stories(title text primary key, genre text, length int, content text);")
-sc.execute("INSERT INTO stories VALUES('gameTitle', 'Horror', 32, 'This is the craziest story ever.');")
+#sc.execute("INSERT INTO stories VALUES('gameTitle', 'Horror', 32, 'This is the craziest story ever.');")
 sdb.commit()
 sdb.close()
 
@@ -37,39 +37,47 @@ sdb.close()
 #with trying to make it only redirect you after you click the button
 #not sure now
 
-@app.route('/redirect_login', methods=['POST'])
+@app.route("/redirect_login", methods=['GET', 'POST'])
 def redirect_login():
+    #session.pop('username',None) #to reset session since we dont have logout yet
+    if 'username' in session:
+        return redirect('/home')
     testUser = request.form.get('username')
     testPass = request.form.get('password')
-    if not testUser or not testPass:
-        return redirect('/')
 
     db = sqlite3.connect(ACC_FILE)
     c = db.cursor()
-    check = c.execute("SELECT COUNT(*) FROM users WHERE username = ? AND password = ?", (testUser, testPass))
+    check = c.execute(f"SELECT COUNT(*) FROM users WHERE username = '{testUser}' AND password = '{testPass}';")
     result = check.fetchone()[0]
     if result == 0:
-        db.close()
-        return redirect('/')
+        return render_template('login.html')
     else:
-        db.close()
-        session['username'] = testUser
+        session['username'] = request.form.get('username')
         return redirect('/home')
+    db.commit()
+    db.close()
+    return render_template('login.html')
 
+@app.route("/logout", methods = ['GET', 'POST'])
+def logout():
+    session.pop('username',None)
+    return redirect('/')
 
 @app.route("/", methods=['GET', 'POST'])
 def login_page():
+    if 'username' in session:
+        return redirect('/home')
     #session.pop('username',None) #to reset session since we dont have logout yet
     return render_template('login.html')
 
-
-@app.route("/home")
+@app.route("/home", methods=['GET', 'POST'])
 def home_page():
     if not session.get('username'):
         return redirect('/')
+    print("username: " + session['username'])
     return render_template('home.html')
 
-@app.route('/redirect_create', methods=['POST'])
+@app.route('/redirect_create', methods=['POST', 'GET'])
 def redirect_create():
     testUser = request.form.get('username')
     testPass = request.form.get('password')
@@ -77,10 +85,10 @@ def redirect_create():
         return redirect('/create_acc')
     db = sqlite3.connect(ACC_FILE)
     c = db.cursor()
-    check = c.execute("SELECT COUNT(*) FROM users WHERE username = ?", (testUser,))
+    check = c.execute(f"SELECT COUNT(*) FROM users WHERE username = {testUser};")
     result = check.fetchone()[0]
     if result == 0:
-        c.execute("INSERT INTO users VALUES (?, ?)", (testUser, testPass))
+        c.execute(f"INSERT INTO users VALUES ({testUser}, {testPass});")
         db.commit()
         db.close()
         session['username'] = testUser
@@ -93,18 +101,15 @@ def redirect_create():
 def register_page():
     return render_template('create_acc.html')
 
-@app.route("/browse_page")
-def browse_page():
-
-    return render_template('browse.html')
-
 def browse_lists():
     db = sqlite3.connect(STORY_FILE)
     c = db.cursor()
     genres = ["Fantasy", "Scientific", "Mystery", "Romance", "Horror", "Crime", "Adventure", "Historical", "Non-fiction"]
-    for x in genres: 
-        lists = c.execute("SELECT * FROM stories WHERE title = ?", (x)) 
-        print(lists)
+    for x in genres:
+        storylist = list(c.execute("SELECT * FROM stories WHERE title = ?", (x)))
+        for x in storylists:
+            print(x)
+
 
 app.debug = True
 app.run()
