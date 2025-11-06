@@ -113,7 +113,7 @@ def browse_page():
     return render_template('browse.html', long_stories=results)
 
 @app.route('/story/<string:Title>')
-def allow(Title):
+def story(Title):
     db = sqlite3.connect(STORY_FILE)
     c = db.cursor()
     check = c.execute(f"SELECT * FROM stories WHERE title = '" + Title + "';")
@@ -127,9 +127,30 @@ def allow(Title):
     else:
         return render_template('story.html', title=Title, genre=title[1], content=title[3])
 
+@app.route('/redirect_add_story')
+def redirect_add_story():
+    title = request.form.get('title')
+    genre = request.form.get('genre')
+    content = request.form.get('content')
+    if (not title or not content):
+        return redirect('/add_story')
+    db = sqlite3.connect(STORY_FILE)
+    c = db.cursor()
+    c.execute(f"INSERT INTO stories VALUES ('{title}', '{genre}', '{len(content)}', '{content}');")
+    db.commit()
+    db.close()
+    return redirect('/home')
+        
+
+@app.route('/add_story')
+def add_story():
+    return render_template('add_story.html')
+
 
 app.debug = True
 app.run()
+
+
 
 '''
 @app.route("/edit_page")
