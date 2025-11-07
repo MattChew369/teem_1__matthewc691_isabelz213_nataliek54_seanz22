@@ -152,7 +152,7 @@ def story(link):
     elif (len(Title) > 6):
         return ("Story naming error")
     else:
-        return render_template('story.html', title=Title[0], genre=Title[1], content=Title[3])
+        return render_template('story.html', title=Title[0], starter=Title[4], genre=Title[1], content=Title[3])
 
 @app.route('/redirect_add_story', methods= ['POST'])
 def redirect_add_story():
@@ -176,17 +176,34 @@ def redirect_add_story():
 def add_story():
     return render_template('add_story.html')
 
+@app.route("/edit/<string:link>")
+def edit_page(link):
+    db = sqlite3.connect(STORY_FILE)
+    c = db.cursor()
+    check = c.execute(f"SELECT * FROM stories WHERE link = '" + link + "';")
+    Title = check.fetchall()
+    Title = list(Title[0])
+    if (len(Title) == 0):
+        return ("Error: no story exists here.")
+    elif (len(Title) > 6):
+        return ("Story naming error")
+    else:
+        return render_template('edit_page.html', title=Title[0], starter=Title[4],
+            content=Title[3], link2=link)
+
+@app.route('/redirect_edit', methods= ['POST', 'GET'])
+def redirect_edit(link):
+    db = sqlite3.connect(STORY_FILE)
+    c = db.cursor()
+    new_content = request.form.get('new_edit')
+    title = request.form.get('title')
+    old = c.execute(f"SELECT content FROM stories WHERE title = '{title}';")
+    old = old.fetchall()
+    old = list(old[0])
+    c.execute(f"UPDATE stories SET content = '{old[3] + new_edit}';")
+    return redirect('/home')
+
+
 
 app.debug = True
 app.run()
-
-
-
-'''
-@app.route("/edit_page")
-def contribute(newWords, ):
-    with
-
-
-html: button submit runs contribute code,
-'''
