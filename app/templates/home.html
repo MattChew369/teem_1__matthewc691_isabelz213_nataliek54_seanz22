@@ -68,10 +68,14 @@
 
     <div class = 'storylist'>
       <li> <b> Your stories: </b> </li>
+      <ul>
         {% for story in stories %}
-        <l1> {{story[title]}} </l1>
+        <li>{{ story[0]}}</li>
         <br>
-        {% endfor %}
+        {% else %}
+        <li><i>No stories yet</i></li>
+        {% endfor %} 
+      </ul>
     </div>
 
   </body>
