@@ -132,7 +132,7 @@ def story(Title):
     else:
         return render_template('story.html', title=Title, genre=title[1], content=title[3])
 
-@app.route('/redirect_add_story')
+@app.route('/redirect_add_story', methods= ['POST'])
 def redirect_add_story():
     if 'username' not in session:
         return redirect ('/')
