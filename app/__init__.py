@@ -131,10 +131,10 @@ def register_page():
 def browse_page():
     db = sqlite3.connect(STORY_FILE)
     c = db.cursor()
-    check_long = c.execute(f"SELECT title FROM stories WHERE title IN (SELECT title FROM stories) ORDER BY title DESC LIMIT 5;")
+    check_long = c.execute(f"SELECT title FROM stories;")
     results = check_long.fetchall()
     results = [x[0] for x in results]
-    check_link = c.execute(f"SELECT link FROM stories WHERE title IN (SELECT title FROM stories) ORDER BY title DESC LIMIT 5;")
+    check_link = c.execute(f"SELECT link FROM stories;")
     links = check_link.fetchall()
     links = [x[0] for x in links]
     return render_template('browse.html', stories=results)
@@ -166,7 +166,7 @@ def redirect_add_story():
         return redirect('/add_story')
     db = sqlite3.connect(STORY_FILE)
     c = db.cursor()
-    c.execute(f"INSERT INTO stories VALUES ('{title}', '{genre}', '{len(content)}', '{content}', '{username}');")
+    c.execute(f"INSERT INTO stories VALUES ('{title}', '{genre}', '{len(content)}', '{content}', '{username}', '{title_to_link(title)}');")
     db.commit()
     db.close()
     return redirect('/home')
