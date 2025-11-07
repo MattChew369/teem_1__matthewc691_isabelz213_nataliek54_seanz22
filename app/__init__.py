@@ -28,14 +28,32 @@ db.commit()
 db.close()
 #table for testing (remove after stories.db works)
 sc.execute("DROP TABLE if EXISTS stories;")
-sc.execute("CREATE TABLE IF NOT EXISTS stories(title text primary key, genre text, length int, content text, username text);")
+sc.execute("CREATE TABLE IF NOT EXISTS stories(title text primary key, genre text, length int, content text, username text, link text);")
 #sc.execute("INSERT INTO stories VALUES('gameTitle', 'Horror', 32, 'This is the craziest story ever.');")
+sc.execute("INSERT INTO stories VALUES('Sold to One Direction', 'Horror', 4, 'NOO!', 'Test', 'sold_to_one_direction');")
+sc.execute("INSERT INTO stories VALUES('Lorem Ipsum', 'Adventure', 80, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Test', 'lorem_ipsum');")
 sdb.commit()
 sdb.close()
 
 #trying to make proxy page that does the logic, i was running into an issue
 #with trying to make it only redirect you after you click the button
 #not sure now
+
+def title_to_link(title):
+    title = title.split(' ')
+    link = ''
+    for i in range(len(title) - 1):
+        link += title[i].lower() + '_'
+    link += title[len(title) - 1]
+    return link
+
+def link_to_title(link):
+    link = link.split('_')
+    title = ''
+    for i in range(len(link) - 1):
+        title += link[i].title() + ' '
+    title += link[len(link) - 1]
+    return title
 
 @app.route("/redirect_login", methods=['GET', 'POST'])
 def redirect_login():
@@ -71,7 +89,7 @@ def login_page():
     return render_template('login.html')
 
 @app.route("/home", methods=['GET', 'POST'])
-def home_page():   
+def home_page():
     if not session.get('username'):
         return redirect('/')
     username = session['username']
@@ -79,7 +97,7 @@ def home_page():
     c = db.cursor()
     c.execute ("SELECT title FROM stories WHERE username = ?", (username,)) #for listing story titles later & only lists the stories created by logged-in
     stories = c.fetchall()
-    db.close() 
+    db.close()
     return render_template('home.html', user = username, stories = stories) #renders page w/ data
 
 @app.route('/redirect_create', methods=['POST', 'GET'])
@@ -115,13 +133,17 @@ def browse_page():
     c = db.cursor()
     check_long = c.execute(f"SELECT title FROM stories WHERE title IN (SELECT title FROM stories) ORDER BY title DESC LIMIT 5;")
     results = check_long.fetchall()
-    return render_template('browse.html', long_stories=results)
+    results = [x[0] for x in results]
+    check_link = c.execute(f"SELECT link FROM stories WHERE title IN (SELECT title FROM stories) ORDER BY title DESC LIMIT 5;")
+    links = check_link.fetchall()
+    links = [x[0] for x in links]
+    return render_template('browse.html', stories=results)
 
-@app.route('/story/<string:Title>')
-def story(Title):
+@app.route('/story/<string:link>')
+def story(link):
     db = sqlite3.connect(STORY_FILE)
     c = db.cursor()
-    check = c.execute(f"SELECT * FROM stories WHERE title = '" + Title + "';")
+    check = c.execute(f"SELECT * FROM stories WHERE title = '" + link_to_title(link) + "';")
     title = check.fetchall()
     title = list(title[0])
     print(title)
@@ -139,7 +161,7 @@ def redirect_add_story():
     title = request.form.get('title')
     genre = request.form.get('genre')
     content = request.form.get('content')
-    username = session['username']  
+    username = session['username']
     if not title or not content:
         return redirect('/add_story')
     db = sqlite3.connect(STORY_FILE)
@@ -148,7 +170,7 @@ def redirect_add_story():
     db.commit()
     db.close()
     return redirect('/home')
-        
+
 
 @app.route('/add_story')
 def add_story():

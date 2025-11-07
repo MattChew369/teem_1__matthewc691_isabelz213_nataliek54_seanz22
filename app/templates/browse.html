@@ -70,9 +70,13 @@
   </div> -->
 
   <div class = 'storylist'>
-    <li> <b> Longest: </b> </li>
-      {% for story in long_stories %}
-      <l1> {{story}} </l1>
+    <li> <b> Stories: </b> </li>
+      {% for story in stories %}
+      <l1>
+        <a href=f'/story/{{story[link]}}' + {{story}} + ''>
+          {{story}}
+        </a>
+      </l1>
       <br>
       {% endfor %}
   </div>
