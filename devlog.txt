@@ -106,3 +106,5 @@ fixed login by restoring code from sunday with a few tweaks, but couldn't figure
 11/6
 added story making page. it doesnt actually work yet idk why
 - Natalie
+fixed html templates to show stories worked on & submitted add pages form; fixed redirect add pages & connected usernames into tables for later use
+-Isabel
