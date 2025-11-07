@@ -143,16 +143,16 @@ def browse_page():
 def story(link):
     db = sqlite3.connect(STORY_FILE)
     c = db.cursor()
-    check = c.execute(f"SELECT * FROM stories WHERE title = '" + link_to_title(link) + "';")
-    title = check.fetchall()
-    title = list(title[0])
-    print(title)
-    if (len(title) == 0):
+    check = c.execute(f"SELECT * FROM stories WHERE link = '" + link + "';")
+    Title = check.fetchall()
+    Title = list(Title[0])
+    print(Title)
+    if (len(Title) == 0):
         return ("Error: no story exists here.")
-    elif (len(title) > 4):
+    elif (len(Title) > 6):
         return ("Story naming error")
     else:
-        return render_template('story.html', title=Title, genre=title[1], content=title[3])
+        return render_template('story.html', title=Title[0], genre=Title[1], content=Title[3])
 
 @app.route('/redirect_add_story', methods= ['POST'])
 def redirect_add_story():
