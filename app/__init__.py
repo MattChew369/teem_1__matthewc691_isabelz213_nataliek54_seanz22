@@ -71,11 +71,16 @@ def login_page():
     return render_template('login.html')
 
 @app.route("/home", methods=['GET', 'POST'])
-def home_page():
+def home_page():   
     if not session.get('username'):
         return redirect('/')
-    print("username: " + session['username'])
-    return render_template('home.html')
+    username = session['username']
+    db = sqlite3.connect(STORY_FILE)
+    c = db.cursor()
+    c.execute ("SELECT title FROM stories;") #for listing story titles later
+    stories = c.fetchall()
+    db.close() 
+    return render_template('home.html', user = username, stories = stories) #renders page w/ data
 
 @app.route('/redirect_create', methods=['POST', 'GET'])
 def redirect_create():
