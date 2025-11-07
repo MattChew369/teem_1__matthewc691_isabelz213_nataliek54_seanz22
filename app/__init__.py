@@ -27,8 +27,8 @@ c.execute("CREATE TABLE IF NOT EXISTS users(username text primary key, password 
 db.commit()
 db.close()
 #table for testing (remove after stories.db works)
-#sc.execute("DROP TABLE if EXISTS stories;")
-sc.execute("CREATE TABLE IF NOT EXISTS stories(title text primary key, genre text, length int, content text);")
+sc.execute("DROP TABLE if EXISTS stories;")
+sc.execute("CREATE TABLE IF NOT EXISTS stories(title text primary key, genre text, length int, content text, username text);")
 #sc.execute("INSERT INTO stories VALUES('gameTitle', 'Horror', 32, 'This is the craziest story ever.');")
 sdb.commit()
 sdb.close()
@@ -77,7 +77,7 @@ def home_page():
     username = session['username']
     db = sqlite3.connect(STORY_FILE)
     c = db.cursor()
-    c.execute ("SELECT title FROM stories;") #for listing story titles later
+    c.execute ("SELECT title FROM stories WHERE username = ?", (username,)) #for listing story titles later & only lists the stories created by logged-in
     stories = c.fetchall()
     db.close() 
     return render_template('home.html', user = username, stories = stories) #renders page w/ data
@@ -134,14 +134,17 @@ def story(Title):
 
 @app.route('/redirect_add_story')
 def redirect_add_story():
+    if 'username' not in session:
+        return redirect ('/')
     title = request.form.get('title')
     genre = request.form.get('genre')
     content = request.form.get('content')
-    if (not title or not content):
+    username = session['username']  
+    if not title or not content:
         return redirect('/add_story')
     db = sqlite3.connect(STORY_FILE)
     c = db.cursor()
-    c.execute(f"INSERT INTO stories VALUES ('{title}', '{genre}', '{len(content)}', '{content}');")
+    c.execute(f"INSERT INTO stories VALUES ('{title}', '{genre}', '{len(content)}', '{content}', '{username}');")
     db.commit()
     db.close()
     return redirect('/home')
