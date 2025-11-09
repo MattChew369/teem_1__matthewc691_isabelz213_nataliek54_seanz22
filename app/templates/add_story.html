@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+
+    </head>
+    <style>
+
+        a:link {
+            color: #f2eddd;
+        }
+
+        a:visited {
+            color: #f2eddd;
+        }
+
+        a:hover {
+            color: #8ea584;
+        }
+
+
+        .subbutton {
+            background-color: #43372f;
+            border-color: #43372f;
+            color: #f2eddd;
+            font-family: "Times New Roman", Times, serif;
+            text-decoration: underline;
+            margin: 10px;
+            font-size: 15px;
+        }
+
+        .title {
+            color: #43372f;
+            display: grid;
+            padding: 5px;
+            grid-template-columns: auto auto auto auto;
+            text-align: left;
+        }
+
+        .nav {
+            display: grid;
+            grid-template-columns: auto auto auto auto;
+            margin: 0px;
+            padding: 5px;
+            background-color: #43372f;
+            color: #f2eddd;
+            font-family: "Times New Roman", Times, serif;
+            text-align: center;
+
+        }
+
+        body {
+            background-color: #737a5d;
+        }
+
+        h1 {
+            padding: 5px;
+            color: #43372f;
+            font-family: "Times New Roman", Times, serif;
+        }
+
+        .titleinputs {
+            background-color: #f2eddd;
+            border-color: #f2eddd;
+            width: 500px;
+            height: 30px;
+            margin-top: 25px;
+            font-size: 20px;
+            text-align: left;
+            font-family: "Times New Roman", Times, serif;
+
+        }
+
+        .genre {
+            display: grid;
+            grid-template-columns: 1 1 auto auto;
+            font-size: 15px;
+            color: #43372f;
+            text-align: left;
+            margin-left: 10px;
+            margin-bottom: 10px;
+            
+        }
+
+        .select {
+            font-family: "Times New Roman", Times, serif;
+            font-size: 20px;
+            background-color: #f2eddd;
+            border-color: #f2eddd;
+            text-align: left;
+        }
+
+        .inputs {
+            text-align: center;
+            font-family: "Times New Roman", Times, serif;
+            font-size: 15px;
+            margin: 10px;
+            width: 95%;
+            height: 600px;
+            background-color: #f2eddd;
+            border-color: #f2eddd;
+            text-align: left;
+        }
+    </style>
+    <body>
+
+        <div class='nav'>
+            <div>
+                <a href='/home'> Home </a>
+            </div>
+            <div>
+                <a href='/browse_page'> Browse </a>
+            </div>
+            <div>
+                <a href='/add_story'> Add story </a>
+            </div>
+            <div>
+                <a href='/logout'> Log out </a>
+            </div>
+        </div>
+        <form action="/redirect_add_story" method="POST">
+            <div class="title">
+                <div>
+                    <h1>Title: </h1>
+                </div>
+                <div>
+                    <input type="text" name="title" class="titleinputs">
+                </div>
+            </div>
+
+            <div class="genre">
+                <div>
+                    <h2>
+                        Genre:
+                    </h2>
+                </div>
+                <div>
+                    <select class="select">
+                        <option value="Adventure">Adventure</option>
+                        <option value="Comedy">Comedy</option>
+                        <option value="Fantasy">Fantasy</option>
+                        <option value="Horror">Horror</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Sci-fi">Sci-fi</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="content">
+                <div>
+                    <input type="text" name="content" class="inputs">
+                </div>
+            </div>
+        
+            <div>
+                <input type="submit" name="create" value="Add new story" class="subbutton">
+            </div>
+        </form>
+       
+
+    </body>
+</html>
