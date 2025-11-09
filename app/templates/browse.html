@@ -71,10 +71,10 @@
 
   <div class = 'storylist'>
     <li> <b> Stories: </b> </li>
-      {% for story in stories %}
+      {% for i in range(length) %}
       <l1>
-        <a href=f'/story/{{story[link]}}' + {{story}} + ''>
-          {{story}}
+        <a href= {{links[i]}}>
+          {{stories[i]}}
         </a>
       </l1>
       <br>

@@ -97,8 +97,14 @@ def home_page():
     c = db.cursor()
     c.execute ("SELECT title FROM stories WHERE username = ?", (username,)) #for listing story titles later & only lists the stories created by logged-in
     stories = c.fetchall()
+    stories = [x[0] for x in stories]
+    c.execute ("SELECT link FROM stories WHERE username = ?", (username,))
+    links = c.fetchall()
+    links = [x[0] for x in links]
     db.close()
-    return render_template('home.html', user = username, stories = stories) #renders page w/ data
+    print(stories)
+    print(links)
+    return render_template('home.html', user = username, stories = stories, links = links, length = len(stories)) #renders page w/ data
 
 @app.route('/redirect_create', methods=['POST', 'GET'])
 def redirect_create():
@@ -131,28 +137,28 @@ def register_page():
 def browse_page():
     db = sqlite3.connect(STORY_FILE)
     c = db.cursor()
-    check_long = c.execute(f"SELECT title FROM stories;")
+    check_long = c.execute(f"SELECT title FROM stories WHERE title IN (SELECT title FROM stories) ORDER BY title DESC LIMIT 5;")
     results = check_long.fetchall()
     results = [x[0] for x in results]
-    check_link = c.execute(f"SELECT link FROM stories;")
+    check_link = c.execute(f"SELECT link FROM stories WHERE title IN (SELECT title FROM stories) ORDER BY title DESC LIMIT 5;")
     links = check_link.fetchall()
     links = [x[0] for x in links]
-    return render_template('browse.html', stories=results)
+    return render_template('browse.html', stories=results, links=links, length = len(results))
 
-@app.route('/story/<string:link>')
+@app.route('/<string:link>')
 def story(link):
     db = sqlite3.connect(STORY_FILE)
     c = db.cursor()
-    check = c.execute(f"SELECT * FROM stories WHERE link = '" + link + "';")
-    Title = check.fetchall()
-    Title = list(Title[0])
-    print(Title)
-    if (len(Title) == 0):
+    check = c.execute(f"SELECT * FROM stories WHERE link = '{link}';")
+    title = check.fetchall()
+    title = list(title[0])
+    print(title)
+    if (len(title) == 0):
         return ("Error: no story exists here.")
-    elif (len(Title) > 6):
+    elif (len(title) > 6):
         return ("Story naming error")
     else:
-        return render_template('story.html', title=Title[0], starter=Title[4], genre=Title[1], content=Title[3])
+        return render_template('story.html', title=link_to_title(link), starter=title[4], genre=title[1], content=title[3])
 
 @app.route('/redirect_add_story', methods= ['POST'])
 def redirect_add_story():
@@ -176,34 +182,17 @@ def redirect_add_story():
 def add_story():
     return render_template('add_story.html')
 
-@app.route("/edit/<string:link>")
-def edit_page(link):
-    db = sqlite3.connect(STORY_FILE)
-    c = db.cursor()
-    check = c.execute(f"SELECT * FROM stories WHERE link = '" + link + "';")
-    Title = check.fetchall()
-    Title = list(Title[0])
-    if (len(Title) == 0):
-        return ("Error: no story exists here.")
-    elif (len(Title) > 6):
-        return ("Story naming error")
-    else:
-        return render_template('edit_page.html', title=Title[0], starter=Title[4],
-            content=Title[3], link2=link)
-
-@app.route('/redirect_edit', methods= ['POST', 'GET'])
-def redirect_edit(link):
-    db = sqlite3.connect(STORY_FILE)
-    c = db.cursor()
-    new_content = request.form.get('new_edit')
-    title = request.form.get('title')
-    old = c.execute(f"SELECT content FROM stories WHERE title = '{title}';")
-    old = old.fetchall()
-    old = list(old[0])
-    c.execute(f"UPDATE stories SET content = '{old[3] + new_edit}';")
-    return redirect('/home')
-
-
 
 app.debug = True
 app.run()
+
+
+
+'''
+@app.route("/edit_page")
+def contribute(newWords, ):
+    with
+
+
+html: button submit runs contribute code,
+'''

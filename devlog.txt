@@ -108,3 +108,7 @@ added story making page. it doesnt actually work yet idk why
 - Natalie
 fixed html templates to show stories worked on & submitted add pages form; fixed redirect add pages & connected usernames into tables for later use
 -Isabel
+
+11/9
+- fixed browse, added links to home
+ - Sean

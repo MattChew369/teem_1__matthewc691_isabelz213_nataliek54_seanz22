@@ -25,13 +25,6 @@
       {{ content }}
     </h3>
     <br>
-
-    <form action='/redirect_edit'>
-      <input type='hidden' value=title>
-        <input type="text" id="new_edit" placeholder="Start new paragraph here..." action="/edit_page">
-        <input type="submit" value="SUBMIT">
-    </form>
-
     <h2>
       Editing History:
     </h2>
@@ -45,6 +38,9 @@
       {% endfor %}
     </ul>
 
-
+    <form>
+        <input type="text" id="new_edit" placeholder="Start new paragraph here..." action="/edit_page">
+        <input type="submit" value="SUBMIT">
+    </form>
 
 </html>

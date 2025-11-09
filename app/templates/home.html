@@ -69,12 +69,14 @@
     <div class = 'storylist'>
       <li> <b> Your stories: </b> </li>
       <ul>
-        {% for story in stories %}
-        <li>{{ story[0]}}</li>
-        <br>
-        {% else %}
-        <li><i>No stories yet</i></li>
-        {% endfor %} 
+        {% for i in range(length) %}
+      <l1>
+        <a href= {{links[i]}}>
+          {{stories[i]}}
+        </a>
+      </l1>
+      <br>
+      {% endfor %}
       </ul>
     </div>
 
