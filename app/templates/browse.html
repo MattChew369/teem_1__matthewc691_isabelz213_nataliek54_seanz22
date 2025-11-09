@@ -62,6 +62,7 @@
   </div>
 
   <div class = 'storylist'>
+  <!-- <div class = 'storylist'>
     <li> <b> Newest: </b> </li>
       {% for story in new_stories %}
       <l1> {{story[title]}} </l1>
@@ -75,8 +76,35 @@
       <l1> {{story[title]}} </l1>
       <br>
       {% endfor %}
+  </div> -->
+
+  <div class="storylist">
+  {% for genre, stories in genre_dict.items() %}
+    <h2>{{ genre }}</h2>
+    {% if stories %}
+      <ul>
+        {% for story in stories %}
+          <li>
+            <a href="/story/{{ story.link }}">{{ story.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No stories in this genre yet.</p>
+    {% endif %}
+  {% endfor %}
+</div>
+      
+      <l1>
+        <a href=f'/story/{{story[link]}}' + {{story}} + ''>
+          {{story}}
+        </a>
+      </l1>
+      <br>
+      <!--{% endfor %}--> 
   </div>
 
 </body>
 
 </html>
+
