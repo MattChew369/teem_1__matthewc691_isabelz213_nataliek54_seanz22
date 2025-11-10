@@ -112,3 +112,13 @@ fixed html templates to show stories worked on & submitted add pages form; fixed
 11/9
 - fixed browse, added links to home
  - Sean
+
+11/9
+Started edit_page
+- Matthew
+
+11/9
+fixed edit_page and genres
+Added contributions
+Everything is now permanent (no more dropping tables)
+- Sean

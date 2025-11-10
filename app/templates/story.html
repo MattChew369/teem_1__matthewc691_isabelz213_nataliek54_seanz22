@@ -95,12 +95,10 @@
     <h2>
       Editing History:
     </h2>
-    <br>
     <ul >
-      <li>{{ starter }} started the story on {{ startDate }}</li>
-      <br>
+      <li>{{ starter }} started the story</li>
       {% for contribution in contributions %}
-        <l1>{{contribution[username]}} added to the story on {{contribution[date]}}</li>
+        <l1>{{contribution}} added to the story</li>
         <br>
       {% endfor %}
     </ul>
@@ -108,9 +106,9 @@
     <h2>
       Add more to the story! 
     </h2>
-
+ 
     <form action="/edit_story" method="POST">
-      <input type="hidden" name="title" value="{{ title }}">
+      <input type="hidden" name="link" value= "{{ link }}">
       <input type="text" name="new_text" placeholder="Start new paragraph here...">
       <input type="submit" value="SUBMIT">
     </div>

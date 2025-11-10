@@ -8,11 +8,14 @@ from flask import request
 
 ACC_FILE = "users.db"
 STORY_FILE = "stories.db"
+CONT_FILE = "contributions.db"
 
 db = sqlite3.connect(ACC_FILE)
 c = db.cursor()
 sdb = sqlite3.connect(STORY_FILE)
 sc = sdb.cursor()
+cdb = sqlite3.connect(CONT_FILE)
+cc = cdb.cursor()
 
 app = Flask(__name__)
 
@@ -27,13 +30,16 @@ c.execute("CREATE TABLE IF NOT EXISTS users(username text primary key, password 
 db.commit()
 db.close()
 #table for testing (remove after stories.db works)
-sc.execute("DROP TABLE if EXISTS stories;")
+#sc.execute("DROP TABLE if EXISTS stories;")
 sc.execute("CREATE TABLE IF NOT EXISTS stories(title text primary key, genre text, length int, content text, username text, link text);")
-#sc.execute("INSERT INTO stories VALUES('gameTitle', 'Horror', 32, 'This is the craziest story ever.');")
-sc.execute("INSERT INTO stories VALUES('Sold to One Direction', 'Horror', 4, 'NOO!', 'Test', 'sold_to_one_direction');")
-sc.execute("INSERT INTO stories VALUES('Lorem Ipsum', 'Adventure', 80, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Test', 'lorem_ipsum');")
+#sc.execute("INSERT INTO stories VALUES('Sold to One Direction', 'Horror', 4, 'NOO!', 'Test', 'sold_to_one_direction');")
+#sc.execute("INSERT INTO stories VALUES('Lorem Ipsum', 'Adventure', 80, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Test', 'lorem_ipsum');")
 sdb.commit()
 sdb.close()
+#cc.execute("DROP TABLE if EXISTS contributions;")
+cc.execute("CREATE TABLE IF NOT EXISTS contributions(username text, title text, added_content text, link text);")
+cdb.commit()
+cdb.close()
 
 #trying to make proxy page that does the logic, i was running into an issue
 #with trying to make it only redirect you after you click the button
@@ -101,10 +107,21 @@ def home_page():
     c.execute ("SELECT link FROM stories WHERE username = ?", (username,))
     links = c.fetchall()
     links = [x[0] for x in links]
+    db.commit()
     db.close()
-    print(stories)
-    print(links)
-    return render_template('home.html', user = username, stories = stories, links = links, length = len(stories)) #renders page w/ data
+
+    cdb = sqlite3.connect(CONT_FILE)
+    cc = cdb.cursor()
+    cc.execute ("SELECT title FROM contributions WHERE username = ?", (username,))
+    cstories = cc.fetchall()
+    cstories = [x[0] for x in cstories]
+    cc.execute ("SELECT link FROM contributions WHERE username = ?", (username,))
+    clinks = cc.fetchall()
+    clinks = [x[0] for x in clinks]
+    cdb.commit()
+    cdb.close()
+
+    return render_template('home.html', user = username, stories = stories, links = links, length = len(stories), cstories = cstories, clinks = clinks, clength = len(cstories)) #renders page w/ data
 
 @app.route('/redirect_create', methods=['POST', 'GET'])
 def redirect_create():
@@ -112,7 +129,6 @@ def redirect_create():
         return redirect('/home')
     testUser = request.form.get('username')
     testPass = request.form.get('password')
-    print(testPass)
     if not testUser or not testPass:
         return redirect('/create_acc')
     db = sqlite3.connect(ACC_FILE)
@@ -152,13 +168,18 @@ def story(link):
     check = c.execute(f"SELECT * FROM stories WHERE link = '{link}';")
     title = check.fetchall()
     title = list(title[0])
-    print(title)
+    cdb = sqlite3.connect(CONT_FILE)
+    cc = cdb.cursor()
+    checkCont = cc.execute(f"SELECT * FROM contributions WHERE title = '{title[0]}';")
+    contributions = checkCont.fetchall()
+    contributions = [x[0] for x in contributions]
+    print(contributions)
     if (len(title) == 0):
         return ("Error: no story exists here.")
     elif (len(title) > 6):
         return ("Story naming error")
     else:
-        return render_template('story.html', title=link_to_title(link), starter=title[4], genre=title[1], content=title[3])
+        return render_template('story.html', title=link_to_title(link), starter=title[4], genre=title[1], content=title[3], link=title[5], contributions = contributions)
 
 @app.route('/redirect_add_story', methods= ['POST'])
 def redirect_add_story():
@@ -168,7 +189,7 @@ def redirect_add_story():
     genre = request.form.get('genre')
     content = request.form.get('content')
     username = session['username']
-    if not title or not content:
+    if not title or not content or not genre:
         return redirect('/add_story')
     db = sqlite3.connect(STORY_FILE)
     c = db.cursor()
@@ -187,21 +208,34 @@ def edit_story():
     if 'username' not in session:
         return redirect ('/')
     new_text = request.form.get('new_text')
-    title = request.form.get('title')
+    link = request.form.get('link')
     if not new_text: 
-        return redirect(f'/{title_to_link(title)}')
+        return redirect("/" + link)
+    #check if user already contributed
+    cdb = sqlite3.connect(CONT_FILE)
+    cc = cdb.cursor()
+    check = cc.execute(f"SELECT COUNT(*) FROM contributions WHERE username = '{session['username']}';")
+    result = check.fetchone()[0]
+    if result > 0:
+        return redirect("/" + link)
+
     db = sqlite3.connect(STORY_FILE)
     c = db.cursor()
-    c.execute("SELECT content fROM stories WHERE title = ?", (title, ))
+    c.execute(f"SELECT * fROM stories WHERE link = '{link}';")
     story = c.fetchone()
     if not story:
         return "Error: story not found."
-    old_content = story[0]
-    updated_content = story + "\n\n" + new_text
-    c.execute("UPDATE stories SET content = ?, length = ? WHERE title = ?", (updated_content, len(updated_content), title))
+    old_content = story[3]
+    updated_content = old_content + "\n\n" + new_text
+    c.execute("UPDATE stories SET content = ?, length = ? WHERE link = ?", (updated_content, len(updated_content), link))
     db.commit()
     db.close()
-    return redirect(f'/{title_to_link(title)}')
+    cdb = sqlite3.connect(CONT_FILE)
+    cc = cdb.cursor()
+    cc.execute(f"INSERT INTO contributions VALUES('{session['username']}', '{story[0]}', '{new_text}', '{story[5]}');")
+    cdb.commit()
+    cdb.close()
+    return redirect("/" + link)
 
 
 app.debug = True

@@ -66,13 +66,27 @@
 
     <h1> Welcome {{user}}! </h1>
 
-    <div class = 'storylist'>
-      <li> <b> Your stories: </b> </li>
+    <div class = 'createdstorylist'>
+      <li> <b> Your Stories: </b> </li>
       <ul>
         {% for i in range(length) %}
       <l1>
         <a href= {{links[i]}}>
           {{stories[i]}}
+        </a>
+      </l1>
+      <br>
+      {% endfor %}
+      </ul>
+    </div>
+    <br>
+    <div class = 'contributedlist'>
+      <li> <b> Stories You Contributed To: </b> </li>
+      <ul>
+        {% for a in range(clength) %}
+      <l1>
+        <a href= {{clinks[a]}}>
+          {{cstories[a]}}
         </a>
       </l1>
       <br>
