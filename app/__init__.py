@@ -182,17 +182,27 @@ def redirect_add_story():
 def add_story():
     return render_template('add_story.html')
 
+@app.route('/edit_story', methods=['POST'])
+def edit_story():
+    if 'username' not in session:
+        return redirect ('/')
+    new_text = request.form.get('new_text')
+    title = request.form.get('title')
+    if not new_text: 
+        return redirect(f'/{title_to_link(title)}')
+    db = sqlite3.connect(STORY_FILE)
+    c = db.cursor()
+    c.execute("SELECT content fROM stories WHERE title = ?", (title, ))
+    story = c.fetchone()
+    if not story:
+        return "Error: story not found."
+    old_content = story[0]
+    updated_content = story + "\n\n" + new_text
+    c.execute("UPDATE stories SET content = ?, length = ? WHERE title = ?", (updated_content, len(updated_content), title))
+    db.commit()
+    db.close()
+    return redirect(f'/{title_to_link(title)}')
+
 
 app.debug = True
 app.run()
-
-
-
-'''
-@app.route("/edit_page")
-def contribute(newWords, ):
-    with
-
-
-html: button submit runs contribute code,
-'''

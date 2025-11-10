@@ -46,7 +46,7 @@
       background-color: #675c49;
       padding: 5px;
       display: grid;
-      grid-teplate-columns: auto auto;
+      grid-template-columns: auto auto;
     }
 
     .content {
@@ -105,5 +105,14 @@
       {% endfor %}
     </ul>
 
+    <h2>
+      Add more to the story! 
+    </h2>
 
-</html>
+    <form action="/edit_story" method="POST">
+      <input type="hidden" name="title" value="{{ title }}">
+      <input type="text" name="new_text" placeholder="Start new paragraph here...">
+      <input type="submit" value="SUBMIT">
+    </div>
+
+</html> 
