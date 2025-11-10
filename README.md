@@ -23,16 +23,20 @@ Then activate it:
 
 ``` . ~/venv/bin/activate ```
 
-4. Now, you will be in your new virtual environment. Download the required packages by copy-and-pasting:
+4. Go into the route using:
+
+```cd teem_1__matthewc691_isabelz213_nataliek54_seanz22```
+
+5. Download the required packages by copy-and-pasting:
 
 ``` pip install -r requirements.txt```
 
 5. Now you should be ready to run the app!
 
 ## LAUNCH CODES: 
-1. Open terminal and go into the route using:
+1. Go into the route using:
 
-```cd teem_1__matthewc691_isabelz213_nataliek54_seanz22/app```
+```cd app```
 
 2. Run the python file using:
 
